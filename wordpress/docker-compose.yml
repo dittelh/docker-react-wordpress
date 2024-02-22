@@ -1,0 +1,48 @@
+version: "3.4" # Specifies the version of the Docker Compose file format
+services:  # Defines the services your application consists of
+  db: # Service name for the database
+    image: mariadb:latest
+    platform: linux/arm64/v8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: MyR00tMySQLPa$$5w0rD
+      MYSQL_DATABASE: MyWordPressDatabaseName
+      MYSQL_USER: MyWordPressUser
+      MYSQL_PASSWORD: Pa$$5w0rD
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    platform: linux/arm64/v8
+    restart: always
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: MyWordPressUser
+      WORDPRESS_DB_PASSWORD: Pa$$5w0rD
+      WORDPRESS_DB_NAME: MyWordPressDatabaseName
+    volumes:
+      - wordpress_data:/var/www/html
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    platform: linux/x86_64
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: MyWordPressUser
+      PMA_PASSWORD: Pa$$5w0rD
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+  wordpress_data:
+
+
