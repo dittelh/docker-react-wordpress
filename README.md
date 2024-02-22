@@ -1,3 +1,28 @@
+React:
+```
+https://github.com/dittelh/react-docker
+```
+
+Wordpress url:
+```
+http://localhost:8000/wp-admin/index.php
+```
+
+Wordpress api url:
+```
+http://localhost:8000/wp-json/wp/v2/posts
+```
+
+Database url:
+```
+http://localhost:8080/
+```
+
+React url:
+```
+http://localhost:3000/
+```
+
 Build react:
 ```
 docker build -t react-docker .
