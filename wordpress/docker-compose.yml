@@ -1,4 +1,5 @@
 version: "3.4" # Specifies the version of the Docker Compose file format
+
 services:  # Defines the services your application consists of
   db: # Service name for the database
     image: mariadb:latest
@@ -27,6 +28,9 @@ services:  # Defines the services your application consists of
       WORDPRESS_DB_NAME: MyWordPressDatabaseName
     volumes:
       - wordpress_data:/var/www/html
+      - ./plugins:/var/www/html/wp-content/plugins # Mount custom plugin directory
+      - ./themes/my-theme:/var/www/html/wp-content/themes/my-theme # Mount custom theme directory
+
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -44,5 +48,3 @@ services:  # Defines the services your application consists of
 volumes:
   db_data:
   wordpress_data:
-
-
